@@ -190,6 +190,18 @@ def markowWordSequence(markow1, markow2, startWord, wordNumber):
     countAverage(sentence.split(' '))
 
 
+def markow1wordSequence(markow1, startWord, wordNumber):
+    lastWord = startWord
+    sentence = ""
+    sentence += lastWord
+    for i in range(wordNumber):
+        nextWord = getNextLetter(markow1, lastWord)
+        lastWord = nextWord
+        sentence += ' ' + nextWord
+    print("markow = ", sentence)
+    countAverage(sentence.split(' '))
+
+
 def saveFile(content, filename, sufix):
     name = "lab1/output_" + filename + sufix + ".txt"
     file = open(name, "w")
@@ -239,9 +251,12 @@ def main():
     # print(markow1)
     intensity = countWordsIntensivity(wiki)
     startWord = numpy.random.choice(list(intensity.keys()), 1, p=list(intensity.values()))
+    startWord = "probability"
+    markow1wordSequence(markow1, startWord, 1000)
     markow2 = generateMarkowWordLevelDictionary(wikiSplited, 2)
     # print(markow2)
-    markowWordSequence(markow1, markow2, startWord[0], 1000)
+    # markowWordSequence(markow1, markow2, startWord[0], 1000)
+    markowWordSequence(markow1, markow2, startWord, 1000)
 
 
 if __name__ == "__main__": main()
